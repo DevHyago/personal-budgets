@@ -7,4 +7,15 @@ class Expense{
       this.description = description;
       this.amount = amount;
    }
+
+   dataValidation(){
+      //Percorre todos os elementos do objeto
+      for(let i in this){
+         if(this[i] == undefined || this[i] == '' || this[i] == null){
+            return false;
+         }
+      }
+      return true;
+   }
+
 }
