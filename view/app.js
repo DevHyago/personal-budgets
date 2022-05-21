@@ -25,6 +25,12 @@ btnExpense.addEventListener('click', () => {
       modal.querySelector('.modal-body').innerHTML = 'Despesa foi cadastrada com sucesso!';
       modalFooter.classList.add('btn-success');
       modalFooter.innerHTML = 'Fechar';
+      year.value = '';
+      month.value = '';
+      day.value = '';
+      type.value = '';
+      description.value = '';
+      amount.value = '';
    }else{
       $('#register-expense').modal('show');
       modal.querySelector('.modal-header').classList.add('text-danger');
@@ -36,3 +42,49 @@ btnExpense.addEventListener('click', () => {
 
 });
 
+function loadExpenseList(){
+   let expenses = bd.retrieveAllRecords();
+
+   let listExpense = document.querySelector('#listExpense');
+   /*
+      <tr>
+         <td>15/02/2022</td>
+         <td>Conta</td>
+         <td>Enel</td>
+         <td>1433,00</td>
+      </tr>
+    */
+   
+   expenses.forEach((Element, index) => {
+      console.log(Element);
+      //Criando Linha
+      let line = listExpense.insertRow();
+      //Criando Colunas
+      line.insertCell(0).innerHTML = `${Element.day}/${Element.month < 10 ? '0'.concat(Element.month) : Element.month}/${Element.year}`;
+      switch(parseInt(Element.type)){
+         case 1:
+            line.insertCell(1).innerHTML = `Alimentação`;
+         break;
+         case 2:
+            line.insertCell(1).innerHTML = `Educação`;
+         break;
+         case 3:
+            line.insertCell(1).innerHTML = `Lazer`;
+         break;
+         case 4:
+            line.insertCell(1).innerHTML = `Saúde`;
+         break;
+         case 5:
+            line.insertCell(1).innerHTML = `Transporte`;
+         break;
+         case 6:
+            line.insertCell(1).innerHTML = `Conta`;
+         break;
+         default:
+            line.insertCell(1).innerHTML = `Outros`;
+      } 
+      line.insertCell(2).innerHTML = Element.description; 
+      line.insertCell(3).innerHTML = `R$ ${Element.amount}`;  
+
+   })
+}

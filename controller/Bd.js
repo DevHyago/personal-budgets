@@ -23,4 +23,23 @@ class Bd{
       localStorage.setItem('id', id);
       
    }
+
+   retrieveAllRecords(){
+      
+      let id = localStorage.getItem('id');
+      let arrExpense = [];
+
+      //Percorrer todos os registros
+      for(let i = 1; i <= id; i++){
+
+         let expense = JSON.parse(localStorage.getItem(i));
+
+         if(expense != null){
+            arrExpense.push(expense);
+         }
+         
+      }
+      return arrExpense;
+   }
+
 }

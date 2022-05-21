@@ -18,7 +18,7 @@
 
 	</head>
 
-  <body>
+  <body onload="loadExpenseList()">
 
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
@@ -89,6 +89,8 @@
             <option value="3">Lazer</option>
             <option value="4">Saúde</option>
             <option value="5">Transporte</option>
+            <option value="6">Conta</option>
+            <option value="7">Outros</option>
           </select>
         </div>
       </div>
@@ -122,14 +124,15 @@
               </tr>
             </thead>
 
-            <tbody>
+            <tbody id="listExpense">
+              
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <script src="model/Bd.js"></script>
+    <script src="controller/Bd.js"></script>
     <script src="model/Expense.js"></script>
     <script src="view/app.js"></script>
   </body>	
