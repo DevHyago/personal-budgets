@@ -1,9 +1,9 @@
 let modal = document.querySelector('#register-expense');
-let btnExpense = document.querySelector('.btn-add-expense');
+let listExpense = document.querySelector('#listExpense');
 let bd = new Bd();
 
 //Event click add expense
-btnExpense.addEventListener('click', () => {
+function addExpense () {
    let year = document.querySelector('#ano');
    let month = document.querySelector('#mes');
    let day = document.querySelector('#dia');
@@ -40,23 +40,41 @@ btnExpense.addEventListener('click', () => {
       modalFooter.innerHTML = 'Voltar e corrigir';
    } 
 
-});
+};
 
 function loadExpenseList(){
    let expenses = bd.retrieveAllRecords();
-
-   let listExpense = document.querySelector('#listExpense');
-   /*
-      <tr>
-         <td>15/02/2022</td>
-         <td>Conta</td>
-         <td>Enel</td>
-         <td>1433,00</td>
-      </tr>
-    */
    
-   expenses.forEach((Element, index) => {
-      console.log(Element);
+   loadExpenseListInHtml(expenses);
+
+}
+
+
+//Pesquisar despesa
+function searchExpense(){
+   let year = document.querySelector('#ano').value;
+   let month = document.querySelector('#mes').value;
+   let day = document.querySelector('#dia').value;
+   let type = document.querySelector('#tipo').value;
+   let description = document.querySelector('#descricao').value;
+   let amount = document.querySelector('#valor').value;
+
+   let expense = new Expense(year, month, day, type, description, amount);
+
+   let filterExpense = bd.search(expense);
+   
+   loadExpenseListInHtml(filterExpense);
+
+}
+
+
+/******* INCLUINDO DESPESAS NO HTML ******/
+function loadExpenseListInHtml(list = []){
+
+   listExpense.innerHTML = '';
+
+   list.forEach((Element, index) => {
+
       //Criando Linha
       let line = listExpense.insertRow();
       //Criando Colunas
@@ -87,4 +105,5 @@ function loadExpenseList(){
       line.insertCell(3).innerHTML = `R$ ${Element.amount}`;  
 
    })
+
 }

@@ -42,4 +42,39 @@ class Bd{
       return arrExpense;
    }
 
+   search(expense){
+      
+      let filterExpense = [];
+
+      filterExpense = this.retrieveAllRecords();
+      
+      //Ano
+      if(expense.year != ''){
+         filterExpense = filterExpense.filter(obj => obj.year == expense.year);
+      }
+      //Mes
+      if(expense.month != ''){
+         filterExpense = filterExpense.filter(obj => obj.month == expense.month);
+      }
+      //Dia
+      if(expense.day != ''){
+         filterExpense = filterExpense.filter(obj => obj.day == expense.day);
+      }
+      //Tipo
+      if(expense.type != ''){
+         filterExpense = filterExpense.filter(obj => obj.type == expense.type);
+      }
+      //Descrição
+      if(expense.description != ''){
+         filterExpense = filterExpense.filter(obj => obj.description == expense.description);
+      }
+      //Valor
+      if(expense.amount != ''){
+         filterExpense = filterExpense.filter(obj => obj.amount == expense.amount);
+      }
+      
+      return filterExpense;
+
+   }
+
 }
