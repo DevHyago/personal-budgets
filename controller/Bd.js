@@ -34,9 +34,13 @@ class Bd{
 
          let expense = JSON.parse(localStorage.getItem(i));
 
-         if(expense != null){
-            arrExpense.push(expense);
+         if(expense == null){
+            continue;
          }
+
+         expense.id = i;
+
+         arrExpense.push(expense);
          
       }
       return arrExpense;
@@ -75,6 +79,10 @@ class Bd{
       
       return filterExpense;
 
+   }
+
+   deleteExpense(id){
+      localStorage.removeItem(id);
    }
 
 }

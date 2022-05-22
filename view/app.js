@@ -102,7 +102,25 @@ function loadExpenseListInHtml(list = []){
             line.insertCell(1).innerHTML = `Outros`;
       } 
       line.insertCell(2).innerHTML = Element.description; 
-      line.insertCell(3).innerHTML = `R$ ${Element.amount}`;  
+      line.insertCell(3).innerHTML = `R$ ${Element.amount}`; 
+      
+      //Botão de deletar
+      let btn = document.createElement('button');
+      btn.className = 'btn btn-danger'
+      btn.innerHTML = '<i class="fas fa-times"></i> Excluir';
+      btn.id = `id_expense_${Element.id}`;
+
+      btn.onclick = function() {
+         let id = this.id.replace('id_expense_', '');
+         
+         bd.deleteExpense(id);
+         
+         window.location.reload();
+      }
+
+      line.insertCell(4).append(btn);  
+
+      console.log(Element);
 
    })
 
